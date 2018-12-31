@@ -64,6 +64,10 @@ func main() {
 }
 
 func InitializeEvent(phrase string) (Event, error) {
-	wire.Build(NewEvent, NewGreeter, NewMessage)
+	wire.Build(NewEvent, NewGreeter, NewMessage, NewEventNumber)
 	return Event{}, nil
+}
+
+func NewEventNumber() int {
+	return 1
 }
