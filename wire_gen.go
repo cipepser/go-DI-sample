@@ -7,15 +7,21 @@ package main
 
 import (
 	"fmt"
+	"github.com/go-errors/errors"
+	"os"
+	"time"
 )
 
 // Injectors from main.go:
 
-func InitializeEvent() Event {
+func InitializeEvent() (Event, error) {
 	message := NewMessage()
 	greeter := NewGreeter(message)
-	event := NewEvent(greeter)
-	return event
+	event, err := NewEvent(greeter)
+	if err != nil {
+		return Event{}, err
+	}
+	return event, nil
 }
 
 // main.go:
@@ -28,13 +34,21 @@ func NewMessage() Message {
 
 type Greeter struct {
 	Message Message
+	Grumpy  bool
 }
 
 func NewGreeter(m Message) Greeter {
-	return Greeter{Message: m}
+	var grumpy bool
+	if time.Now().Unix()%2 == 0 {
+		grumpy = true
+	}
+	return Greeter{Message: m, Grumpy: grumpy}
 }
 
 func (g Greeter) Greet() Message {
+	if g.Grumpy {
+		return Message("Go away!")
+	}
 	return g.Message
 }
 
@@ -42,8 +56,11 @@ type Event struct {
 	Greeter Greeter
 }
 
-func NewEvent(g Greeter) Event {
-	return Event{Greeter: g}
+func NewEvent(g Greeter) (Event, error) {
+	if g.Grumpy {
+		return Event{}, errors.New("could not create event: event greeter is grumpy")
+	}
+	return Event{Greeter: g}, nil
 }
 
 func (e Event) Start() {
@@ -52,7 +69,11 @@ func (e Event) Start() {
 }
 
 func main() {
-	e := InitializeEvent()
+	e, err := InitializeEvent()
+	if err != nil {
+		fmt.Printf("failed to create event: %s\n", err)
+		os.Exit(2)
+	}
 
 	e.Start()
 }
