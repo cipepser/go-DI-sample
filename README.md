@@ -4,9 +4,10 @@ go-cloudの[Wire](https://github.com/google/wire)を触っていなかったの�
 
 ## 公式のチュートリアル
 
-[公式のチュートリアル](https://github.com/google/wire/blob/master/_tutorial/README.md)をやってみる。
+[公式のチュートリアル](https://github.com/google/wire/blob/master/_tutorial/README.md)をやってみる。  
+コードは[ここ](https://github.com/cipepser/go-DI-sample/tree/master/tutorial)。
 
-ファイルの先頭に`//+build wireinject`をつけて、CLI上で`wire`を実行すると`wire_gen.go`が生成される。
+ファイルの先頭に`//+build wireinject`をつけて、CLI上で`wire`を実行すると`wire_gen.go`が生成される。  
 
 もとのファイルには`wire.Build(NewEvent, NewGreeter, NewMessage)`などと書いておくとコンストラクタをコード生成してくれる。
 `error`を返すようなコンストラクタ（今回でいうと`NewEvent`）も判断して以下のように生成してくれる。
@@ -34,6 +35,8 @@ github.com/sakushin/wire-example/component
 
 > 生成されたコードは冗長になりますが、常に再生成が可能なことからその冗長さについて悲観する必要はなく、また当然 Go の表現力を越えないため多くの人間にとって理解しやすいといったメリットがあります。
 
+
+## google/wireを使ったDIとDI関数のシグネチャについて #go
 
 
 ## 【公式】[Wire User Guide](https://github.com/google/wire/blob/master/docs/guide.md)
