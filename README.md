@@ -64,9 +64,12 @@ Injectors:
 
 Basicsの内容については、上記の[google/wireを使ったDIとDI関数のシグネチャについて #go](https://budougumi0617.github.io/2018/12/14/how-to-use-google-wire/)と重複しているので省略。
 
+Advancedの内容は以下でそれぞれコード生成までした。
 
-
-
+* [Binding Interfaces](https://github.com/cipepser/go-DI-sample/tree/master/advanced)
+* [Struct Providers](https://github.com/cipepser/go-DI-sample/tree/master/structProviders)
+* [Binding Values](https://github.com/cipepser/go-DI-sample/tree/master/bindingValues)
+* [Cleanup functions](https://github.com/cipepser/go-DI-sample/tree/master/cleanupFunctions)
 
 ## References
 * [Wire: Automated Initialization in Go](https://github.com/google/wire)
